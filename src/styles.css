@@ -6,6 +6,7 @@
 .brand-logo-full{width:112px;height:62px;border-radius:4px}
 .brand-logo-symbol{width:72px;height:76px;border-radius:4px}
 .zaad-logo,.v2-brand{flex-shrink:0}
+.v2-visual{transform-style:flat!important}
 .about-logo .brand-logo-full{width:280px;height:226px;max-width:100%}
 .v2-core .brand-logo-symbol,.core-logo .brand-logo-symbol,.orbit-core .brand-logo-symbol{width:72px;height:76px}
 @media(max-width:720px){.brand-logo-full{width:96px;height:54px}}
