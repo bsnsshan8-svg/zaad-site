@@ -1,0 +1,10 @@
+/* Final hero polish: use the viewport instead of leaving a large dead band above the hero. */
+.zh-hero{min-height:calc(100vh - 8px);padding:104px 0 62px}
+.zh-wrap{align-items:center}
+.zh-scene{margin-top:-10px}
+/* Replace the numeric floating stat with a neutral live-status badge. */
+.zh-float-a b{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#55ddff}
+.zh-float-a span{font-size:6px}
+/* Keep the visual premium and spacious without implying age/adult content. */
+.zh-float{min-width:112px}
+@media(max-width:780px){.zh-hero{min-height:1000px;padding-top:104px;padding-bottom:45px}.zh-scene{margin-top:0}}
