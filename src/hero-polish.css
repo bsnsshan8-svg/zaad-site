@@ -1,0 +1,43 @@
+/* ZAAD hero — premium motion layer */
+.hero{position:relative;min-height:760px;padding:150px 0 92px!important;overflow:hidden;background:#041522!important;isolation:isolate}
+.hero:before{content:"";position:absolute;inset:-20%;z-index:-3;background:radial-gradient(circle at 74% 38%,rgba(22,211,255,.24),transparent 24%),radial-gradient(circle at 30% 75%,rgba(0,111,255,.2),transparent 28%),linear-gradient(115deg,#03121f 0%,#06283c 48%,#041522 100%);animation:heroBreathe 10s ease-in-out infinite alternate}
+.hero:after{content:"";position:absolute;z-index:-2;left:-5%;right:-5%;bottom:-2px;height:58px;background:#fff;clip-path:ellipse(55% 55% at 50% 100%)}
+.hero-glow{z-index:-1!important;filter:blur(30px)!important;animation:glowFloat 8s ease-in-out infinite alternate}
+.glow-one{width:430px!important;height:430px!important;right:4%!important;top:7%!important;background:radial-gradient(circle,rgba(33,214,255,.2),transparent 68%)!important}
+.glow-two{width:300px!important;height:300px!important;left:20%!important;bottom:0!important;background:radial-gradient(circle,rgba(0,104,255,.18),transparent 70%)!important;animation-delay:-3s}
+.hero-grid{position:relative;z-index:2;grid-template-columns:.9fr 1.1fr!important;gap:55px!important}
+.hero-copy{max-width:620px!important}
+.hero .eyebrow{font-size:10px!important;letter-spacing:.22em!important;color:#5de1ff!important;text-transform:uppercase}
+.hero .eyebrow i{background:#37ddff!important;box-shadow:0 0 0 6px rgba(55,221,255,.1),0 0 22px rgba(55,221,255,.65)!important;animation:pulseDot 2s infinite}
+.hero h1{font-family:'Barlow Condensed',sans-serif!important;font-size:clamp(68px,7.6vw,112px)!important;line-height:.78!important;letter-spacing:-.045em!important;text-transform:uppercase!important;color:#fff!important;margin-bottom:18px!important;text-shadow:0 12px 55px rgba(0,0,0,.28)}
+.hero h2{font-family:'Barlow Condensed',sans-serif!important;font-size:clamp(27px,3vw,43px)!important;line-height:.92!important;text-transform:uppercase!important;letter-spacing:-.02em!important;color:#fff!important}
+.hero h2 span{color:#55ddff!important}
+.hero p{font-size:13px!important;line-height:1.75!important;color:#a9c1ce!important;max-width:570px!important}
+.hero-actions{margin-top:27px!important}
+.hero .zaad-btn{border-radius:7px!important;padding:14px 20px!important}
+.hero-checks span{color:#d1e0e8!important}
+.flow-visual{height:535px!important;border-radius:28px!important;background:linear-gradient(145deg,rgba(9,46,64,.96),rgba(3,21,34,.98))!important;border:1px solid rgba(73,220,255,.22)!important;box-shadow:0 40px 110px rgba(0,0,0,.4),inset 0 0 70px rgba(31,202,255,.05)!important;transform:perspective(1000px) rotateY(-2deg);animation:heroCardIn 1s cubic-bezier(.2,.8,.2,1) both}
+.flow-visual:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(39,217,255,.12),transparent 38%);animation:corePulse 4s ease-in-out infinite}
+.flow-grid{opacity:.65!important;background-size:34px 34px!important;animation:gridDrift 18s linear infinite}
+.flow-orbit{border-color:rgba(77,222,255,.22)!important;animation:orbitSpin 18s linear infinite}
+.orbit-b{animation-direction:reverse!important;animation-duration:27s!important}
+.apple-core{filter:drop-shadow(0 0 35px rgba(16,184,255,.35));animation:coreFloat 4s ease-in-out infinite!important}
+.apple-body{background:linear-gradient(145deg,#42e3ff,#0874ff)!important;box-shadow:0 25px 70px rgba(0,116,255,.45)!important}
+.apple-leaf{background:#42e3ff!important}
+.flow-node{border:1px solid rgba(101,226,255,.28)!important;background:rgba(248,253,255,.96)!important;backdrop-filter:blur(8px);animation:nodeFloat 4s ease-in-out infinite}
+.node-a{animation-delay:-.4s}.node-b{animation-delay:-1.3s}.node-c{animation-delay:-2.1s}.node-d{animation-delay:-2.8s}.node-e{animation-delay:-1.8s}
+.flow-line{background:linear-gradient(90deg,transparent,#3bdcff,transparent)!important;box-shadow:0 0 9px rgba(59,220,255,.55);animation:linePulse 2.5s ease-in-out infinite}
+.flow-badge{background:rgba(3,20,32,.9)!important;border:1px solid rgba(82,221,255,.3);box-shadow:0 0 30px rgba(25,205,255,.12)!important}
+@keyframes heroBreathe{from{transform:scale(1) translate3d(0,0,0)}to{transform:scale(1.06) translate3d(-1%,1%,0)}}
+@keyframes glowFloat{from{transform:translate3d(0,0,0)}to{transform:translate3d(30px,-22px,0)}}
+@keyframes gridDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(34px,34px,0)}}
+@keyframes orbitSpin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes coreFloat{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-53%) scale(1.035)}}
+@keyframes corePulse{0%,100%{opacity:.45;transform:scale(.96)}50%{opacity:1;transform:scale(1.04)}}
+@keyframes nodeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes linePulse{0%,100%{opacity:.25}50%{opacity:.9}}
+@keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.7}}
+@keyframes heroCardIn{from{opacity:0;transform:perspective(1000px) translateY(35px) rotateY(-8deg) scale(.97)}to{opacity:1;transform:perspective(1000px) translateY(0) rotateY(-2deg) scale(1)}}
+@media (max-width:900px){.hero{padding-top:125px!important}.hero-grid{grid-template-columns:1fr!important}.hero-copy{max-width:720px}.flow-visual{height:470px!important;transform:none}.hero h1{font-size:clamp(62px,14vw,94px)!important}}
+@media (max-width:600px){.hero{padding:112px 0 65px!important}.hero h1{font-size:clamp(56px,17vw,82px)!important}.hero h2{font-size:30px!important}.flow-visual{height:390px!important;border-radius:20px!important}.orbit-b{width:390px!important;height:390px!important}.orbit-a{width:260px!important;height:260px!important}.flow-node{transform:scale(.88)}.node-a{left:4%}.node-b{right:4%}.node-c{left:3%}.node-d{right:3%}.node-e{bottom:5%}.apple-core{transform:translate(-50%,-50%) scale(.82)}}
+@media (prefers-reduced-motion:reduce){.hero:before,.hero-glow,.flow-grid,.flow-orbit,.apple-core,.flow-visual:before,.flow-node,.flow-line,.hero .eyebrow i,.flow-visual{animation:none!important}}
