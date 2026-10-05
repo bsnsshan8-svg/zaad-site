@@ -1,3 +1,3 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { ResultsPage } from '../components/ZaadLegal';
-export const Route = createFileRoute('/results')({ component: ResultsPage });
+export const Route = createFileRoute('/results')({ head: () => ({ meta: [{"title": "Patient Growth Results | Zero Apples A Day"}, {"name": "description", "content": "Measure patient acquisition through qualified leads, booked appointments, and show-up rates."}, {"property": "og:title", "content": "Patient Growth Results | Zero Apples A Day"}, {"property": "og:description", "content": "Measure patient acquisition through qualified leads, booked appointments, and show-up rates."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }), component: ResultsPage });

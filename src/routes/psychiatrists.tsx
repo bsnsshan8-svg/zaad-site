@@ -1,3 +1,3 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { PsychiatryPage } from '../components/ZaadInner';
-export const Route = createFileRoute('/psychiatrists')({ component: PsychiatryPage });
+export const Route = createFileRoute('/psychiatrists')({ head: () => ({ meta: [{"title": "Psychiatry Practice Growth | Zero Apples A Day"}, {"name": "description", "content": "Patient acquisition, inquiry follow-up, and booking workflows for psychiatry practices."}, {"property": "og:title", "content": "Psychiatry Practice Growth | Zero Apples A Day"}, {"property": "og:description", "content": "Patient acquisition, inquiry follow-up, and booking workflows for psychiatry practices."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }), component: PsychiatryPage });

@@ -1,3 +1,3 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { BookPage } from '../components/ZaadInner';
-export const Route = createFileRoute('/book')({ component: BookPage });
+export const Route = createFileRoute('/book')({ head: () => ({ meta: [{"title": "Book a Strategy Call | Zero Apples A Day"}, {"name": "description", "content": "Discuss your healthcare practice\u2019s patient acquisition and follow-up needs with Zero Apples A Day."}, {"property": "og:title", "content": "Book a Strategy Call | Zero Apples A Day"}, {"property": "og:description", "content": "Discuss your healthcare practice\u2019s patient acquisition and follow-up needs with Zero Apples A Day."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }), component: BookPage });

@@ -1,3 +1,3 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { PricingPage } from '../components/ZaadInner';
-export const Route = createFileRoute('/pricing')({ component: PricingPage });
+export const Route = createFileRoute('/pricing')({ head: () => ({ meta: [{"title": "ZAAD Plans & Pricing | Zero Apples A Day"}, {"name": "description", "content": "Explore Zero Apples A Day plans for healthcare acquisition, CRM, automation, and growth."}, {"property": "og:title", "content": "ZAAD Plans & Pricing | Zero Apples A Day"}, {"property": "og:description", "content": "Explore Zero Apples A Day plans for healthcare acquisition, CRM, automation, and growth."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }), component: PricingPage });

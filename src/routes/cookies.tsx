@@ -1,3 +1,3 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { LegalPage } from '../components/ZaadLegal';
-export const Route = createFileRoute('/cookies')({ component:()=> <LegalPage title="Cookie Policy" kind="Cookie Policy"/> });
+export const Route = createFileRoute('/cookies')({ head: () => ({ meta: [{"title": "Cookie Policy | Zero Apples A Day"}, {"name": "description", "content": "Review the Zero Apples A Day cookie policy."}, {"property": "og:title", "content": "Cookie Policy | Zero Apples A Day"}, {"property": "og:description", "content": "Review the Zero Apples A Day cookie policy."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }), component:()=> <LegalPage title="Cookie Policy" kind="Cookie Policy"/> });

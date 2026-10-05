@@ -1,3 +1,3 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { CRMPage } from '../components/ZaadInner';
-export const Route = createFileRoute('/crm')({ component: CRMPage });
+export const Route = createFileRoute('/crm')({ head: () => ({ meta: [{"title": "ZAAD CRM | Zero Apples A Day"}, {"name": "description", "content": "Connect leads, conversations, follow-up, and appointments with ZAAD CRM."}, {"property": "og:title", "content": "ZAAD CRM | Zero Apples A Day"}, {"property": "og:description", "content": "Connect leads, conversations, follow-up, and appointments with ZAAD CRM."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }), component: CRMPage });

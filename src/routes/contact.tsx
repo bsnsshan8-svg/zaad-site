@@ -1,3 +1,3 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { ContactPage } from '../components/ZaadInner';
-export const Route = createFileRoute('/contact')({ component: ContactPage });
+export const Route = createFileRoute('/contact')({ head: () => ({ meta: [{"title": "Contact ZAAD | Zero Apples A Day"}, {"name": "description", "content": "Contact Zero Apples A Day about healthcare patient acquisition, CRM, and automation."}, {"property": "og:title", "content": "Contact ZAAD | Zero Apples A Day"}, {"property": "og:description", "content": "Contact Zero Apples A Day about healthcare patient acquisition, CRM, and automation."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }), component: ContactPage });

@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Render brand imagery through the shared BrandLogo/BrandHome components; use the full uploaded logo for identity placements and its cropped symbol for compact diagrams and the favicon to keep branding consistent.
