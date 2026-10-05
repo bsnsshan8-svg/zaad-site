@@ -24,7 +24,7 @@ export default function ZaadInteractiveSections() {
   const [budget, setBudget] = useState(3000), [cpl, setCpl] = useState(80), [qualification, setQualification] = useState(60), [booking, setBooking] = useState(55);
   const [missedRate, setMissedRate] = useState(15), [missedRecovery, setMissedRecovery] = useState(30), [database, setDatabase] = useState(2000), [reactivationRate, setReactivationRate] = useState(4), [reactivationBooking, setReactivationBooking] = useState(35), [reviewRate, setReviewRate] = useState(70);
   useEffect(() => { const timer = window.setInterval(() => setActive(v => (v + 1) % journey.length), 5000); return () => window.clearInterval(timer); }, []);
-  const stage = journey[active], Icon = stage.icon;
+  const stage = journey[active]!, Icon = stage.icon;
   const results = useMemo(() => {
     const leads = budget / Math.max(cpl, 1), qualified = leads * qualification / 100, acquisitionBooked = qualified * booking / 100;
     const recovered = leads * missedRate / 100 * missedRecovery / 100, reactivationBooked = database * reactivationRate / 100 * reactivationBooking / 100, reviews = acquisitionBooked * reviewRate / 100;
