@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
-import ZaadHomeFixed from '../components/ZaadHomeFixed';
+import ZaadHome from '../components/ZaadHome2';
 
 export const Route = createFileRoute('/')({
-  component: ZaadHomeFixed,
+  component: ZaadHome,
 });
