@@ -1,6 +1,7 @@
 import { ArrowRight, Check, Play } from 'lucide-react';
 import { BrandHome } from './BrandLogo';
 import ZaadHome from './ZaadHome2';
+import ZaadInteractiveSections from './ZaadInteractiveSections';
 import './zaad-hero-new.css';
 import './zaad-hero-fixes.css';
 
@@ -49,6 +50,8 @@ export default function ZaadHeroNew() {
         </div>
         <div className="zh-scroll">SCROLL TO SEE THE MACHINE <span>↓</span></div>
       </section>
+
+      <ZaadInteractiveSections />
       <div className="zh-rest"><ZaadHome /></div>
     </div>
   );
