@@ -1,6 +1,7 @@
 import { ArrowRight, Check, Play } from 'lucide-react';
 import { BrandHome } from './BrandLogo';
 import ZaadInteractiveSections from './ZaadInteractiveSections';
+import ZaadExtendedSections from './ZaadExtendedSections';
 import './zaad-hero-new.css';
 import './zaad-hero-fixes.css';
 
@@ -42,6 +43,7 @@ export default function ZaadHeroNew() {
       </section>
 
       <ZaadInteractiveSections />
+      <ZaadExtendedSections />
     </div>
   );
 }
