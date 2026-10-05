@@ -1,0 +1,60 @@
+import React, { useState } from 'react';
+
+const blue = '#19b9ee';
+
+export default function ZaadNewSections() {
+  const [active, setActive] = useState('acquisition');
+  const [channel, setChannel] = useState('all');
+
+  const systems = {
+    acquisition: { tag: '01 / BRING THEM IN', title: 'Build a patient acquisition engine.', body: 'Paid ads, local search, landing pages and offers work together to create a predictable stream of qualified enquiries.', stats: ['Ads', 'Local SEO', 'Landing pages', 'Offers'] },
+    nurture: { tag: '02 / TURN INTEREST INTO ACTION', title: 'Every lead gets a next step.', body: 'Our automated follow-up and agent-led conversations respond while intent is high, qualify the patient and move the right people toward the calendar.', stats: ['Instant response', 'Qualification', 'Follow-up', 'Booking'] },
+    recovery: { tag: '03 / RECOVER MISSED OPPORTUNITIES', title: 'A missed call does not have to become a lost patient.', body: 'When a clinic misses a call, ZAAD automatically reaches back out, continues the conversation and helps recover the appointment.', stats: ['Missed call', 'Automatic message', 'Conversation', 'Appointment'] },
+    reputation: { tag: '04 / TURN CARE INTO TRUST', title: 'Build a reputation that keeps converting.', body: 'After the appointment, our reputation funnel guides the right patient experiences toward reviews and strengthens the clinic’s online credibility.', stats: ['Patient experience', 'Feedback', 'Review request', '5-star growth'] },
+    reactivation: { tag: '05 / WAKE UP YOUR DATABASE', title: 'Your old patients are not old leads.', body: 'We segment the clinic’s existing database and run targeted messaging campaigns with relevant offers to bring past patients back.', stats: ['Old database', 'Targeted offer', 'Messaging', 'Reactivation'] },
+  } as const;
+
+  const item = systems[active as keyof typeof systems];
+
+  return (
+    <main className="zaad-lower">
+      <section className="problem-section">
+        <div className="section-kicker">THE PROBLEM IS NOT JUST LEADS.</div>
+        <h2>Most clinics have a <span>patient flow</span> problem.</h2>
+        <p className="section-intro">Getting enquiries is only the beginning. If acquisition, response, booking, reputation and reactivation do not work together, opportunities leak out of the system.</p>
+        <div className="problem-grid">
+          {[
+            ['01','Demand','Not enough consistent enquiries','Build a predictable acquisition engine.'],
+            ['02','Conversion','Leads are not followed up','Respond, qualify and book while intent is high.'],
+            ['03','Recovery','Missed calls become lost patients','Automatically reconnect and recover the conversation.'],
+            ['04','Trust','Weak review momentum','Turn great patient experiences into visible trust.'],
+            ['05','Reactivation','Old database sits untouched','Put past patients back into a relevant conversation.'],
+            ['06','Visibility','Everything lives in different places','Bring leads, conversations and progress into one view.'],
+          ].map(([n, title, head, copy]) => <article className="problem-card" key={n}><small>{n} / {title}</small><h3>{head}</h3><p>{copy}</p></article>)}
+        </div>
+      </section>
+
+      <section className="system-story">
+        <div className="story-copy"><div className="section-kicker">THE ZAAD ENGINE</div><h2>From first click to <span>patient.</span></h2><p>One connected system handles the moments between marketing and the appointment.</p><div className="story-list">{['Attract the right patient','Respond before intent cools','Qualify and nurture','Book the appointment','Keep the relationship growing'].map((x,i)=><div className="story-row" key={x}><b>0{i+1}</b><span>{x}</span><i>→</i></div>)}</div></div><div className="flow-visual"><div className="flow-orbit"/><div className="flow-core">ZAAD<br/><span>PATIENT FLOW</span></div>{['AD','LEAD','AI FOLLOW-UP','BOOKED','REVIEW'].map((x,i)=><div className={`flow-node n${i+1}`} key={x}>{x}</div>)}</div>
+      </section>
+
+      <section className="capability-section">
+        <div className="section-heading"><div><div className="section-kicker">ONE SYSTEM. EVERY TOUCHPOINT.</div><h2>Everything after the <span>lead.</span></h2></div><p>Explore how each part of ZAAD moves the patient closer to the clinic — and keeps the system working after they arrive.</p></div>
+        <div className="cap-tabs">{Object.entries(systems).map(([key,v])=><button className={active===key?'active':''} onClick={()=>setActive(key)} key={key}>{v.tag}</button>)}</div>
+        <div className="cap-panel"><div><small>{item.tag}</small><h3>{item.title}</h3><p>{item.body}</p><a href="#book">See how ZAAD handles it <span>↗</span></a></div><div className="signal-card"><div className="signal-top"><span>LIVE SYSTEM</span><b>ACTIVE</b></div>{item.stats.map((s,i)=><div className="signal-row" key={s}><strong>0{i+1}</strong><span>{s}</span><em>{i===item.stats.length-1?'✓':'→'}</em></div>)}</div></div>
+      </section>
+
+      <section className="recovery-section"><div className="recovery-copy"><div className="section-kicker">MISSED CALL RECOVERY</div><h2>They called.<br/><span>You missed it.</span><br/>ZAAD follows up.</h2><p>Instead of leaving the patient waiting, the system starts the next conversation automatically.</p><div className="chat-flow"><div><small>INCOMING CALL</small><b>Missed call</b><span>11:42 AM</span></div><i>↓</i><div><small>ZAAD RESPONSE</small><b>“Sorry we missed you. How can we help?”</b><span>11:43 AM · Automated</span></div><i>↓</i><div className="success"><small>RECOVERED</small><b>Appointment confirmed</b><span>Calendar updated</span></div></div></div></section>
+
+      <section className="reactivation-section"><div className="reactivation-copy"><div className="section-kicker">DATABASE REACTIVATION</div><h2>Your best next patient might already be <span>in your database.</span></h2><p>We turn dormant patient records into targeted conversations instead of letting valuable history collect dust.</p></div><div className="campaign"><div className="campaign-head"><span>REACTIVATION CAMPAIGN</span><b>RUNNING</b></div><div className="campaign-row"><strong>2,418</strong><span>patients selected</span></div><div className="campaign-message">“We’re offering returning patients a special appointment rate this month.”</div><div className="campaign-metrics"><span><b>842</b> sent</span><span><b>126</b> replies</span><span><b>38</b> booked</span></div></div></section>
+
+      <section className="reputation-section"><div className="reviews-visual"><div className="review-score"><b>4.9</b><span>★★★★★</span><small>CLINIC RATING</small></div>{['“Amazing experience.”','“The team really listened.”','“Would absolutely recommend.”'].map((x,i)=><div className="review-card" key={x}><span>★★★★★</span><p>{x}</p><small>Verified patient · {i+2}d ago</small></div>)}</div><div className="reputation-copy"><div className="section-kicker">5-STAR REPUTATION FUNNEL</div><h2>Make great care <span>visible.</span></h2><p>ZAAD gives every completed patient experience a structured path toward feedback and review requests — without making your team chase people.</p><div className="reputation-flow"><span>Appointment</span><i>→</i><span>Feedback</span><i>→</i><span>5★ Review</span></div></div></section>
+
+      <section className="app-section"><div className="app-copy"><div className="section-kicker">THE DOCTOR'S COMMAND CENTER</div><h2>Everything your growth system is doing — <span>in your pocket.</span></h2><p>See leads, conversations, appointments and progress without opening five different tools.</p><ul><li>Live lead pipeline</li><li>Appointments and booking status</li><li>Campaign activity</li><li>One inbox for every route</li></ul></div><div className="phone"><div className="phone-bar">ZAAD <span>●</span></div><div className="phone-title">Today <small>Monday</small></div><div className="phone-stat"><b>24</b><span>active leads</span><em>+18%</em></div><div className="mini-chart"><i/><i/><i/><i/><i/><i/></div><div className="inbox"><small>UNIBOX</small><div><b>Website Chat</b><span>New enquiry</span></div><div><b>Missed Call</b><span>Appointment request</span></div><div><b>Reactivation</b><span>Offer reply</span></div></div></div></section>
+
+      <section className="unibox-section"><div className="unibox-head"><div className="section-kicker">ONE INBOX. EVERY ROUTE.</div><h2>Stop switching tabs to find the <span>patient.</span></h2><p>Website chat, calls, messaging and reactivation conversations arrive in one place.</p></div><div className="unibox-ui"><aside><button className={channel==='all'?'sel':''} onClick={()=>setChannel('all')}>All conversations <b>24</b></button><button className={channel==='chat'?'sel':''} onClick={()=>setChannel('chat')}>Website chat <b>8</b></button><button className={channel==='calls'?'sel':''} onClick={()=>setChannel('calls')}>Missed calls <b>5</b></button><button className={channel==='react'?'sel':''} onClick={()=>setChannel('react')}>Reactivation <b>11</b></button></aside><div className="conversation"><div className="conversation-head"><span>Patient conversation</span><b>QUALIFIED</b></div><div className="bubble patient">Hi, I’d like to book an appointment.</div><div className="bubble agent">Absolutely — I can help with that. What day works best for you?</div><div className="bubble patient">Tomorrow afternoon.</div><div className="conversation-footer">Agent + automation working together <span>●</span></div></div></div></section>
+
+      <section className="final-cta" id="book"><div className="section-kicker">READY WHEN YOU ARE</div><h2>Build the system that turns<br/><span>attention into patients.</span></h2><p>ZAAD connects acquisition, follow-up, booking, reputation, recovery and reactivation into one growth engine.</p><a href="#top">Book a strategy call <b>↗</b></a></section>
+    </main>
+  );
+}
