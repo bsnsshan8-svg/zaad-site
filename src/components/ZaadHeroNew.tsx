@@ -2,6 +2,7 @@ import { ArrowRight, Check, Play } from 'lucide-react';
 import { BrandHome } from './BrandLogo';
 import ZaadHome from './ZaadHome2';
 import './zaad-hero-new.css';
+import './zaad-hero-fixes.css';
 
 export default function ZaadHeroNew() {
   return (
@@ -41,7 +42,7 @@ export default function ZaadHeroNew() {
               <div className="zh-z-top"><span>ZAAD</span><i>LIVE</i></div><strong>BRINGS<br/><b>PATIENTS IN.</b></strong>
               <div className="zh-patient-stream"><span>NEW PATIENT</span><i/><span>NEW PATIENT</span><i/><span>BOOKED</span></div>
             </div>
-            <div className="zh-float zh-float-a"><b>+18</b><span>NEW INQUIRIES</span></div>
+            <div className="zh-float zh-float-a"><b>LIVE SIGNAL</b><span>NEW PATIENT ACTIVITY</span></div>
             <div className="zh-float zh-float-b"><b>07</b><span>APPOINTMENTS BOOKED</span></div>
             <div className="zh-orbit orbit1"/><div className="zh-orbit orbit2"/>
           </div>
