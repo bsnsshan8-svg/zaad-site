@@ -7,4 +7,7 @@
 .zh-float-a span{font-size:6px}
 /* Keep the visual premium and spacious without implying age/adult content. */
 .zh-float{min-width:112px}
+/* Hide the legacy ZaadHome hero/nav underneath the new hero. Keep all later homepage sections. */
+.zh-rest>.zaad-site>.zaad-nav,
+.zh-rest>.zaad-site>.reference-hero{display:none!important}
 @media(max-width:780px){.zh-hero{min-height:1000px;padding-top:104px;padding-bottom:45px}.zh-scene{margin-top:0}}
