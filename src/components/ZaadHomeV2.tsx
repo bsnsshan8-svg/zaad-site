@@ -1,3 +1,4 @@
+import { BrandLogo, BrandHome } from './BrandLogo';
 import { useState } from 'react';
 import { ArrowRight, CalendarCheck, Check, ChevronDown, Menu, MessageSquare, PhoneCall, Play, Sparkles, X, Zap } from 'lucide-react';
 import ZaadHome from './ZaadHome2';
@@ -17,10 +18,7 @@ export default function ZaadHomeV2() {
     <div className="zaad-v2">
       <style>{styles}</style>
       <header className="v2-nav">
-        <a className="v2-brand" href="/" aria-label="ZAAD home">
-          <span className="v2-mark"><span /></span>
-          <strong>ZAAD</strong>
-        </a>
+        <BrandHome className="v2-brand" />
         <nav className="v2-links">
           <a href="#system">Solutions <ChevronDown size={13} /></a>
           <a href="#industries">Who We Help <ChevronDown size={13} /></a>
@@ -59,7 +57,7 @@ export default function ZaadHomeV2() {
 
           <div className="v2-visual" aria-label="Animated ZAAD patient flow from ad to booked patient">
             <div className="v2-orbit o1" /><div className="v2-orbit o2" /><div className="v2-orbit o3" />
-            <div className="v2-glow-core"><div className="v2-core"><Sparkles size={21} /><strong>ZAAD</strong><small>PATIENT FLOW</small></div></div>
+            <div className="v2-glow-core"><div className="v2-core"><BrandLogo compact /></div></div>
             <svg className="v2-lines" viewBox="0 0 700 560" preserveAspectRatio="none" aria-hidden="true">
               <defs><linearGradient id="flowLine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#22c1ff" stopOpacity=".15" /><stop offset=".5" stopColor="#60d8ff" /><stop offset="1" stopColor="#0b5fff" stopOpacity=".2" /></linearGradient></defs>
               <path d="M75 175 C185 80 235 190 350 280 S510 150 625 130" /><path d="M80 390 C190 470 245 340 350 280 S515 380 620 430" /><path d="M115 120 C230 170 235 250 350 280 S475 245 590 90" /><path d="M120 450 C220 365 245 300 350 280 S500 310 580 455" />

@@ -1,3 +1,3 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { LegalPage } from '../components/ZaadLegal';
-export const Route = createFileRoute('/privacy')({ component:()=> <LegalPage title="Privacy Policy" kind="Privacy"/> });
+export const Route = createFileRoute('/privacy')({ head: () => ({ meta: [{"title": "Privacy Policy | Zero Apples A Day"}, {"name": "description", "content": "Review the Zero Apples A Day privacy policy."}, {"property": "og:title", "content": "Privacy Policy | Zero Apples A Day"}, {"property": "og:description", "content": "Review the Zero Apples A Day privacy policy."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }), component:()=> <LegalPage title="Privacy Policy" kind="Privacy"/> });
