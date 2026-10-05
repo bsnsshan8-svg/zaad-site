@@ -1,6 +1,5 @@
 @import './styles.css';
 @import './components/ZaadNewSections.css';
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 html { scroll-behavior: smooth; }
 body { overflow-x: hidden; }
