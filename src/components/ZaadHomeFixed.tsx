@@ -1,5 +1,5 @@
-import { BrandLogo, BrandHome } from './BrandLogo';
 // @ts-nocheck
+import { BrandLogo, BrandHome } from './BrandLogo';
 import { useState, type ReactNode } from 'react';
 import { ArrowRight, Check, ChevronDown, Menu, Plus, X, Zap } from 'lucide-react';
 import { features, faqs, stages } from '../lib/site-data';
