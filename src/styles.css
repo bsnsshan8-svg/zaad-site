@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-:root{--brand-logo-surface:#fff}
+:root{--brand-logo-surface:transparent}
 .brand-logo{display:block;object-fit:contain;background:var(--brand-logo-surface);flex-shrink:0}
 .brand-logo-full{width:112px;height:62px;border-radius:4px}
 .brand-logo-symbol{width:72px;height:76px;border-radius:4px}
