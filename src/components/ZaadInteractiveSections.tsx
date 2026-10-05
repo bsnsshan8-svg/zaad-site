@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ArrowRight, Bot, CalendarCheck, Check, MessageSquare, MousePointer2, PhoneCall, Sparkles, Target, Users, Zap, Star, RefreshCw, Calculator } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowRight, Bot, CalendarCheck, Check, Calculator, MessageSquare, MousePointer2, PhoneCall, RefreshCw, Sparkles, Star, Target, Users, Zap } from 'lucide-react';
 import './zaad-interactive.css';
 
 const journey = [
@@ -9,39 +9,88 @@ const journey = [
   { label: 'BOOK', title: 'Convert conversations into appointments.', text: 'Qualification, scheduling, reminders, and confirmations work together to make booking the natural next step.', icon: CalendarCheck },
   { label: 'GROW', title: 'Turn booked demand into a repeatable growth engine.', text: 'See which channels create qualified opportunities and keep improving the parts that produce appointments.', icon: Zap },
 ];
+
 const replies = [
   ['Patient', 'Hi, I saw your ad and I’m interested in an appointment.'],
   ['ZAAD', 'Absolutely. I can help with that. Are you looking for an initial consultation or a follow-up?'],
   ['Patient', 'An initial consultation. Do you have anything this week?'],
   ['ZAAD', 'Yes — I can show the available times and help you choose one that works.'],
 ];
-type CalcMode = 'all' | 'acquisition' | 'reputation' | 'missed' | 'reactivation';
+
+type CalcMode = 'acquisition' | 'missed' | 'reactivation' | 'reputation';
+
+const calculatorModes = {
+  acquisition: { label: 'Patient Acquisition', icon: Target, input: 'Monthly ad budget', min: 500, max: 15000, step: 250, defaultValue: 3000, unit: '$', helper: 'See how many new inquiries your acquisition engine could create.', resultLabel: 'EST. NEW INQUIRIES', calculate: (v: number) => v / 80 },
+  missed: { label: 'Missed Call Recovery', icon: PhoneCall, input: 'Missed calls per month', min: 5, max: 200, step: 5, defaultValue: 40, unit: '', helper: 'See how many missed-call opportunities your automated follow-up could recover.', resultLabel: 'EST. RECOVERED APPOINTMENTS', calculate: (v: number) => v * 0.3 },
+  reactivation: { label: 'Database Reactivation', icon: RefreshCw, input: 'Patients in your old database', min: 250, max: 20000, step: 250, defaultValue: 3000, unit: '', helper: 'See the potential appointment pool sitting inside your existing database.', resultLabel: 'EST. REACTIVATION OPPORTUNITIES', calculate: (v: number) => v * 0.04 },
+  reputation: { label: '5-Star Reputation', icon: Star, input: 'Completed patients per month', min: 20, max: 500, step: 10, defaultValue: 100, unit: '', helper: 'See how many review requests your reputation funnel could generate.', resultLabel: 'EST. REVIEW REQUESTS', calculate: (v: number) => v * 0.7 },
+} as const;
 
 export default function ZaadInteractiveSections() {
   const [active, setActive] = useState(0);
   const [messageIndex, setMessageIndex] = useState(1);
-  const [calcMode, setCalcMode] = useState<CalcMode>('all');
-  const [budget, setBudget] = useState(3000), [cpl, setCpl] = useState(80), [qualification, setQualification] = useState(60), [booking, setBooking] = useState(55);
-  const [missedRate, setMissedRate] = useState(15), [missedRecovery, setMissedRecovery] = useState(30), [database, setDatabase] = useState(2000), [reactivationRate, setReactivationRate] = useState(4), [reactivationBooking, setReactivationBooking] = useState(35), [reviewRate, setReviewRate] = useState(70);
+  const [calcMode, setCalcMode] = useState<CalcMode>('acquisition');
+  const [calcValue, setCalcValue] = useState(calculatorModes.acquisition.defaultValue);
+
   useEffect(() => { const timer = window.setInterval(() => setActive(v => (v + 1) % journey.length), 5000); return () => window.clearInterval(timer); }, []);
-  const stage = journey[active]!, Icon = stage.icon;
-  const results = useMemo(() => {
-    const leads = budget / Math.max(cpl, 1), qualified = leads * qualification / 100, acquisitionBooked = qualified * booking / 100;
-    const recovered = leads * missedRate / 100 * missedRecovery / 100, reactivationBooked = database * reactivationRate / 100 * reactivationBooking / 100, reviews = acquisitionBooked * reviewRate / 100;
-    return { leads, qualified, acquisitionBooked, recovered, reactivationBooked, reviews, total: acquisitionBooked + recovered + reactivationBooked };
-  }, [budget,cpl,qualification,booking,missedRate,missedRecovery,database,reactivationRate,reactivationBooking,reviewRate]);
-  const primary = calcMode === 'acquisition' ? results.acquisitionBooked : calcMode === 'reputation' ? results.reviews : calcMode === 'missed' ? results.recovered : calcMode === 'reactivation' ? results.reactivationBooked : results.total;
-  const primaryLabel = calcMode === 'acquisition' ? 'POTENTIAL APPOINTMENTS FROM ACQUISITION' : calcMode === 'reputation' ? 'POTENTIAL 5-STAR REVIEWS' : calcMode === 'missed' ? 'POTENTIAL RECOVERED APPOINTMENTS' : calcMode === 'reactivation' ? 'POTENTIAL REACTIVATION APPOINTMENTS' : 'POTENTIAL APPOINTMENTS FROM THE SYSTEM';
-  const round = (n:number) => Math.round(n).toLocaleString();
-  const money = (n:number) => `$${Math.round(n).toLocaleString()}`;
-  const Slider = ({label,value,min,max,step,onChange,suffix=''}:{label:string;value:number;min:number;max:number;step:number;onChange:(v:number)=>void;suffix?:string}) => <label className="zi-control"><span><b>{label}</b><strong>{suffix === '$' ? money(value) : `${value}${suffix}`}</strong></span><input type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(Number(e.target.value))}/></label>;
+
+  const stage = journey[active]!;
+  const StageIcon = stage.icon;
+  const mode = calculatorModes[calcMode];
+  const ModeIcon = mode.icon;
+  const result = Math.round(mode.calculate(calcValue));
+  const displayValue = mode.unit === '$' ? `$${calcValue.toLocaleString()}` : calcValue.toLocaleString();
+
+  const selectMode = (next: CalcMode) => {
+    setCalcMode(next);
+    setCalcValue(calculatorModes[next].defaultValue);
+  };
+
   return <div className="zi-wrap">
-    <section className="zi-journey"><div className="zi-container"><div className="zi-heading"><div><span className="zi-kicker"><Sparkles size={13}/> THE PATIENT ACQUISITION MACHINE</span><h2>Watch the <em>journey</em> move.</h2><p>Don't just show features. See what happens when every part of patient acquisition is connected.</p></div><div className="zi-live"><i/> LIVE SYSTEM <span>Auto-playing</span></div></div><div className="zi-machine"><div className="zi-steps">{journey.map((item,i)=>{const StepIcon=item.icon;return <button key={item.label} className={active===i?'active':''} onClick={()=>setActive(i)}><span className="zi-step-num">0{i+1}</span><StepIcon size={17}/><b>{item.label}</b><ArrowRight size={14}/></button>})}</div><div className="zi-stage"><div className="zi-stage-glow"/><div className="zi-stage-core"><Icon size={30}/><span>{stage.label}</span></div><div className="zi-pulse p1"/><div className="zi-pulse p2"/><div className="zi-stage-copy"><span>STAGE 0{active+1}</span><h3>{stage.title}</h3><p>{stage.text}</p><div className="zi-tags"><span><Check size={11}/> Connected</span><span><Check size={11}/> Automated</span><span><Check size={11}/> Measurable</span></div></div></div></div></div></section>
-    <section className="zi-cockpit"><div className="zi-container"><div className="zi-calculator"><div className="zi-calc-head"><div><span className="zi-kicker"><Calculator size={13}/> PATIENT GROWTH CALCULATOR</span><h2>What could your <em>growth system</em> produce?</h2><p>Adjust the assumptions and see how each ZAAD component can contribute to your patient journey. These are planning scenarios, not guarantees.</p></div><div className="zi-calc-result"><span>{primaryLabel}</span><strong>{round(primary)}</strong><small>per month in this scenario</small></div></div>
-      <div className="zi-calc-tabs">{([['all','Full System'],['acquisition','Patient Acquisition'],['reputation','Reputation'],['missed','Missed Calls'],['reactivation','Reactivation']] as [CalcMode,string][]).map(([key,label])=><button key={key} className={calcMode===key?'active':''} onClick={()=>setCalcMode(key)}>{label}</button>)}</div>
-      <div className="zi-calc-body"><div className="zi-calc-controls"><div className="zi-control-title">YOUR ASSUMPTIONS <span>Drag to model</span></div><Slider label="Monthly acquisition budget" value={budget} min={500} max={15000} step={250} onChange={setBudget} suffix="$"/><Slider label="Estimated cost per lead" value={cpl} min={30} max={250} step={5} onChange={setCpl} suffix="$"/><Slider label="Lead qualification rate" value={qualification} min={20} max={90} step={5} onChange={setQualification} suffix="%"/><Slider label="Booking rate of qualified leads" value={booking} min={20} max={90} step={5} onChange={setBooking} suffix="%"/><div className="zi-control-divider"/><Slider label="Missed-call rate" value={missedRate} min={5} max={40} step={5} onChange={setMissedRate} suffix="%"/><Slider label="Missed-call recovery rate" value={missedRecovery} min={10} max={80} step={5} onChange={setMissedRecovery} suffix="%"/><div className="zi-control-divider"/><Slider label="Old database size" value={database} min={250} max={20000} step={250} onChange={setDatabase}/><Slider label="Reactivation response rate" value={reactivationRate} min={1} max={15} step={1} onChange={setReactivationRate} suffix="%"/><Slider label="Reactivation booking rate" value={reactivationBooking} min={10} max={80} step={5} onChange={setReactivationBooking} suffix="%"/><Slider label="Review request rate" value={reviewRate} min={30} max={95} step={5} onChange={setReviewRate} suffix="%"/></div>
-        <div className="zi-calc-results"><div className="zi-result-hero"><span>MONTHLY MODEL</span><strong>{round(primary)}</strong><b>{primaryLabel}</b><div className="zi-result-bar"><i style={{width:`${Math.min(100,Math.max(8,primary/Math.max(results.total,1)*100))}%`}}/></div></div><div className="zi-result-grid"><article><Target size={17}/><span>New inquiries</span><strong>{round(results.leads)}</strong><small>from acquisition</small></article><article><Bot size={17}/><span>Qualified</span><strong>{round(results.qualified)}</strong><small>ready for follow-up</small></article><article><CalendarCheck size={17}/><span>Booked</span><strong>{round(results.acquisitionBooked)}</strong><small>from acquisition</small></article><article><PhoneCall size={17}/><span>Recovered</span><strong>{round(results.recovered)}</strong><small>missed calls</small></article><article><RefreshCw size={17}/><span>Reactivated</span><strong>{round(results.reactivationBooked)}</strong><small>old database</small></article><article><Star size={17}/><span>Reviews</span><strong>{round(results.reviews)}</strong><small>potential requests</small></article></div><div className="zi-model-note"><Zap size={14}/><span>Planning scenario only. Actual results depend on market, offer, budget, lead quality, and conversion rates.</span></div></div></div></div>
-      <div className="zi-cockpit-grid" style={{marginTop:18}}><div className="zi-panel zi-conversation"><div className="zi-panel-top"><div><span className="zi-kicker">FOLLOW-UP SIMULATOR</span><h3>Every inquiry gets a <em>next step.</em></h3></div><span className="zi-online"><i/> AI ACTIVE</span></div><div className="zi-chat">{replies.slice(0,messageIndex+1).map(([who,text],i)=><div className={`zi-message ${who==='ZAAD'?'bot':''}`} key={i}><span>{who==='ZAAD'?<Bot size={12}/>:<Users size={12}/>}</span><p>{text}</p></div>)}</div><button className="zi-next" onClick={()=>setMessageIndex(v=>v>=replies.length-1?1:v+1)}><MessageSquare size={14}/> Simulate next message <ArrowRight size={14}/></button></div><div className="zi-panel zi-model-summary"><span className="zi-kicker">YOUR MODEL AT A GLANCE</span><h3>{round(results.total)} <em>potential appointments</em></h3><div className="zi-summary-row"><span>Acquisition</span><b>{round(results.acquisitionBooked)}</b></div><div className="zi-summary-row"><span>Missed-call recovery</span><b>+{round(results.recovered)}</b></div><div className="zi-summary-row"><span>Database reactivation</span><b>+{round(results.reactivationBooked)}</b></div><div className="zi-summary-row"><span>Potential review requests</span><b>{round(results.reviews)}</b></div><p>Use the sliders to model the mix of ZAAD services that fits a practice.</p></div></div></div></section>
+    <section className="zi-journey">
+      <div className="zi-container">
+        <div className="zi-heading">
+          <div>
+            <span className="zi-kicker"><Sparkles size={13}/> THE PATIENT ACQUISITION MACHINE</span>
+            <h2>Watch the <em>journey</em> move.</h2>
+            <p>Don't just show features. See what happens when every part of patient acquisition is connected.</p>
+          </div>
+          <div className="zi-live"><i/> LIVE SYSTEM <span>Auto-playing</span></div>
+        </div>
+        <div className="zi-machine">
+          <div className="zi-steps">{journey.map((item, i) => { const StepIcon = item.icon; return <button key={item.label} className={active === i ? 'active' : ''} onClick={() => setActive(i)}><span className="zi-step-num">0{i + 1}</span><StepIcon size={17}/><b>{item.label}</b><ArrowRight size={14}/></button>; })}</div>
+          <div className="zi-stage">
+            <div className="zi-stage-glow"/><div className="zi-stage-core"><StageIcon size={30}/><span>{stage.label}</span></div><div className="zi-pulse p1"/><div className="zi-pulse p2"/>
+            <div className="zi-stage-copy"><span>STAGE 0{active + 1}</span><h3>{stage.title}</h3><p>{stage.text}</p><div className="zi-tags"><span><Check size={11}/> Connected</span><span><Check size={11}/> Automated</span><span><Check size={11}/> Measurable</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="zi-cockpit">
+      <div className="zi-container">
+        <div className="zi-short-calc">
+          <div className="zi-short-head">
+            <div><span className="zi-kicker"><Calculator size={13}/> PATIENT GROWTH ESTIMATOR</span><h2>What could ZAAD <em>add?</em></h2><p>Pick one growth lever, move the slider, and see the potential opportunity. Illustrative planning only.</p></div>
+            <div className="zi-short-result"><span>{mode.resultLabel}</span><strong>{result.toLocaleString()}</strong><small>potential per month</small></div>
+          </div>
+          <div className="zi-short-options">{(Object.keys(calculatorModes) as CalcMode[]).map(key => { const item = calculatorModes[key]; const Icon = item.icon; return <button key={key} className={calcMode === key ? 'active' : ''} onClick={() => selectMode(key)}><Icon size={16}/><span>{item.label}</span></button>; })}</div>
+          <div className="zi-short-control">
+            <div className="zi-short-control-top"><b>{mode.input}</b><strong>{displayValue}</strong></div>
+            <input aria-label={mode.input} type="range" min={mode.min} max={mode.max} step={mode.step} value={calcValue} onChange={e => setCalcValue(Number(e.target.value))}/>
+            <div className="zi-short-range"><span>{mode.unit === '$' ? `$${mode.min.toLocaleString()}` : mode.min.toLocaleString()}</span><span>{mode.unit === '$' ? `$${mode.max.toLocaleString()}` : mode.max.toLocaleString()}</span></div>
+            <p>{mode.helper}</p>
+          </div>
+          <div className="zi-short-bottom"><div className="zi-mini-result"><ModeIcon size={18}/><div><span>{mode.resultLabel}</span><b>{result.toLocaleString()}</b></div></div><div className="zi-mini-flow"><span>INPUT</span><ArrowRight size={14}/><span>ZAAD</span><ArrowRight size={14}/><strong>OPPORTUNITY</strong></div></div>
+        </div>
+
+        <div className="zi-cockpit-grid" style={{ marginTop: 18 }}>
+          <div className="zi-panel zi-conversation"><div className="zi-panel-top"><div><span className="zi-kicker">FOLLOW-UP SIMULATOR</span><h3>Every inquiry gets a <em>next step.</em></h3></div><span className="zi-online"><i/> AI ACTIVE</span></div><div className="zi-chat">{replies.slice(0, messageIndex + 1).map(([who, text], i) => <div className={`zi-message ${who === 'ZAAD' ? 'bot' : ''}`} key={i}><span>{who === 'ZAAD' ? <Bot size={12}/> : <Users size={12}/>}</span><p>{text}</p></div>)}</div><button className="zi-next" onClick={() => setMessageIndex(v => v >= replies.length - 1 ? 1 : v + 1)}><MessageSquare size={14}/> Simulate next message <ArrowRight size={14}/></button></div>
+          <div className="zi-panel zi-model-summary"><span className="zi-kicker">THE ZAAD LOOP</span><h3>From attention to <em>appointment.</em></h3><div className="zi-summary-row"><span><Target size={13}/> Acquire</span><b>Bring them in</b></div><div className="zi-summary-row"><span><Bot size={13}/> Nurture</span><b>Keep them engaged</b></div><div className="zi-summary-row"><span><CalendarCheck size={13}/> Book</span><b>Get them scheduled</b></div><div className="zi-summary-row"><span><Star size={13}/> Grow</span><b>Keep the relationship</b></div><p>One connected system instead of disconnected marketing tools.</p></div>
+        </div>
+      </div>
+    </section>
+
     <section className="zi-proof-band"><div className="zi-container zi-proof-inner"><div><span className="zi-kicker">CONNECTED BY DESIGN</span><h3>One machine. <em>Every patient signal.</em></h3></div><div className="zi-signal-row"><span><MousePointer2 size={14}/> AD</span><span><MessageSquare size={14}/> LEAD</span><span><PhoneCall size={14}/> CALL</span><span><Bot size={14}/> FOLLOW-UP</span><span><CalendarCheck size={14}/> BOOKED</span><ArrowRight size={18}/><strong>ZAAD</strong></div></div></section>
   </div>;
 }
