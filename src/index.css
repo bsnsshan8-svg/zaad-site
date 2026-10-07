@@ -344,3 +344,31 @@ body { overflow-x: hidden; }
 @media(max-width:900px){
   .app-shell,.zaad-new,.hero,.reference-hero{max-width:100%;overflow-x:hidden}
 }
+
+
+/* FORCE REDESIGN VISIBILITY + MOBILE OVERRIDES */
+.compact-home .zaad-solutions{display:block!important}
+.compact-home .zaad-engine{display:none!important}
+
+@media(max-width:900px){
+  .zaad-new .zaad-section-head,
+  .zaad-new .recovery-grid,
+  .zaad-new .growth-grid,
+  .zaad-new .platform-grid{grid-template-columns:1fr!important}
+  .zaad-new .zaad-section-head>p{max-width:620px}
+  .zaad-new .zaad-module{grid-template-columns:1fr!important}
+  .zaad-new .unibox-ui{grid-template-columns:1fr!important}
+  .zaad-new .unibox-ui aside{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .reference-hero .hero h1{font-size:clamp(42px,12.5vw,58px)!important;line-height:.9!important}
+  .reference-hero .hero h2{font-size:25px!important;line-height:1!important}
+  .reference-hero .hero-art{height:300px!important}
+  .zaad-new .zaad-section-head h2,
+  .zaad-new .zaad-problem-head h2{font-size:clamp(38px,11.5vw,54px)!important}
+  .zaad-new .zaad-module-flow{overflow:hidden}
+  .zaad-new .module-arrow{font-size:16px}
+  .zaad-new .growth-flow{flex-wrap:wrap}
+  .zaad-new .phone-shell{margin-inline:auto}
+  .zaad-new .unibox-ui aside{grid-template-columns:1fr 1fr}
+}
