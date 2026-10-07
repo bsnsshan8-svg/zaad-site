@@ -4,15 +4,16 @@ import ZaadHero from './components/ZaadHero';
 import ZaadSystemCore from './components/ZaadSystemCore';
 import ZaadNewSections from './components/ZaadNewSections';
 
-const sectionOrder = ['problem', 'recovery', 'growth', 'platform', 'unibox', 'final'];
+const sectionOrder = ['problem', 'solutions', 'recovery', 'growth', 'platform', 'unibox', 'final'];
 
 export default function App() {
   const [selection, setSelection] = useState<string[]>(sectionOrder);
 
   useEffect(() => {
+    // Clear the old section-picker preference so previous browser state
+    // cannot hide the redesigned sections.
     try {
-      const raw = localStorage.getItem('zaad-section-selection');
-      if (raw) setSelection(JSON.parse(raw));
+      localStorage.removeItem('zaad-section-selection');
     } catch {}
   }, []);
 
@@ -22,7 +23,7 @@ export default function App() {
     <div id="top" className="app-shell">
       <ZaadHero />
       <ZaadSystemCore />
-      <div className={`compact-home ${hidden.map((id) => `hide-${id}`).join(' ')}`}>
+      <div className={hidden.map((id) => `hide-${id}`).join(' ')}>
         <ZaadNewSections />
       </div>
     </div>
