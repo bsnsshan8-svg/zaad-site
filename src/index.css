@@ -13,3 +13,362 @@ body { overflow-x: hidden; }
 /* Live section filtering. The first two homepage sections remain locked. */
 .hide-problem .zaad-new > section:nth-child(1),.hide-engine .zaad-new > section:nth-child(2),.hide-capabilities .zaad-new > section:nth-child(3),.hide-recovery .zaad-new > section:nth-child(4),.hide-growth .zaad-new > section:nth-child(5),.hide-platform .zaad-new > section:nth-child(6),.hide-unibox .zaad-new > section:nth-child(7),.hide-final .zaad-new > section:nth-child(8){display:none}
 @media(max-width:900px){.library-header{display:block}.library-actions{margin-top:18px}.library-layout{grid-template-columns:1fr}.library-sidebar{position:static}.mock{padding:28px;min-height:360px}.mock-grid{grid-template-columns:1fr 1fr}.preview-meta{align-items:flex-start;display:block}.preview-meta button{margin-top:12px}}
+
+
+/* =========================================================
+   ZAAD 2026 POLISH PASS
+   Brand blue: #2F80FF
+   Mobile-first fixes, cleaner hierarchy, tighter mockups.
+   ========================================================= */
+
+:root{
+  --zaad-brand:#2F80FF;
+  --zaad-brand-dark:#1769df;
+  --zaad-ink:#071a2d;
+  --zaad-muted:#52687b;
+  --zaad-surface:#f7f9fc;
+}
+
+/* Remove the redundant second "engine" presentation: the dedicated
+   ZAAD System Core above already owns this story. */
+.compact-home .zaad-engine{display:none!important}
+
+/* Stronger fixed navigation contrast */
+.zaad-nav{
+  background:rgba(3,16,29,.96);
+  border-bottom-color:rgba(255,255,255,.12);
+}
+.zaad-nav nav a,.nav-secondary{color:#d2dee7}
+.zaad-nav nav a:hover,.nav-secondary:hover{color:#fff}
+.zaad-btn{
+  background:var(--zaad-brand);
+  border-color:var(--zaad-brand);
+  box-shadow:0 9px 25px rgba(47,128,255,.25);
+}
+.zaad-btn:hover{box-shadow:0 13px 30px rgba(47,128,255,.35)}
+.zaad-btn-secondary{background:#fff;border-color:#fff;color:var(--zaad-ink)}
+
+/* Hero: never allow text to create horizontal overflow */
+.reference-hero,.reference-hero *{min-width:0}
+.reference-hero .hero-copy{max-width:100%}
+.reference-hero .hero h1{
+  max-width:11.5ch;
+  text-wrap:balance;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+.reference-hero .hero h2{max-width:24ch;text-wrap:balance}
+.reference-hero .hero p{color:#b5c3ce}
+.reference-hero .hero-art{width:100%;max-width:100%}
+
+/* Brand blue normalization across the main homepage */
+.hero h1 span,.hero h2 span,.section-head h2 span,.final-cta h2 span,
+.zaad-new h2 span{color:var(--zaad-brand)}
+.zaad-kicker,.zs-eyebrow{color:var(--zaad-brand)!important}
+.zaad-new .zaad-leak b,
+.zaad-new .zaad-module-copy small,
+.zaad-new .growth-flow i,
+.zaad-new .conversation-head span{color:var(--zaad-brand)}
+.zaad-new .zaad-tabs button.active{background:var(--zaad-ink)}
+.zaad-new .zaad-final a b{background:var(--zaad-brand)}
+
+/* Improve readability on light surfaces */
+.zaad-new .zaad-solutions,
+.zaad-new .zaad-growth,
+.zaad-new .zaad-platform,
+.zaad-new .zaad-unibox{background:#f7f9fc}
+.zaad-new .zaad-section-head p,
+.zaad-new .zaad-module-copy p,
+.zaad-new .zaad-growth p,
+.zaad-new .zaad-platform p,
+.zaad-new .zaad-unibox>div>p{color:#52687b}
+.zaad-new .zaad-module{box-shadow:0 18px 45px rgba(7,26,45,.07)}
+
+/* Mockups: readable text, less "tiny UI texture" */
+.zaad-new .recovery-event strong,
+.zaad-new .module-node strong,
+.zaad-new .conversation .msg{font-size:clamp(13px,1.05vw,16px);line-height:1.4}
+.zaad-new .recovery-event small,
+.zaad-new .recovery-event em,
+.zaad-new .module-status,
+.zaad-new .conversation-status{font-size:11px;line-height:1.4}
+.zaad-new .phone-inbox button{font-size:12px}
+.zaad-new .phone-inbox button b{font-size:10px}
+.zaad-new .dashboard-card small,.zaad-new .dashboard-card span{font-size:10px}
+.zaad-new .conversation{width:100%;max-width:none}
+.zaad-new .conversation-head strong{font-size:15px}
+.zaad-new .conversation-head span{font-size:9px}
+
+/* UniBox: proper conversation spacing */
+.zaad-new .unibox-ui aside{
+  min-width:0;
+}
+.zaad-new .unibox-ui aside button{
+  gap:12px;
+  min-height:46px;
+  line-height:1.25;
+}
+.zaad-new .conversation{
+  min-width:0;
+}
+.zaad-new .msg{
+  max-width:min(78%,520px);
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+.zaad-new .conversation-status{margin-top:32px}
+
+/* Keep every section compact and intentional */
+.zaad-new .zaad-problem{padding-bottom:80px}
+.zaad-new .zaad-leak-grid{margin-top:42px}
+.zaad-new .zaad-recovery,
+.zaad-new .zaad-growth,
+.zaad-new .zaad-platform,
+.zaad-new .zaad-unibox{padding-top:88px;padding-bottom:88px}
+
+/* Better CTA consistency */
+.zaad-new .zaad-final a{
+  background:var(--zaad-brand);
+  color:#fff;
+}
+.zaad-new .zaad-final a b{
+  background:#fff;
+  color:var(--zaad-brand);
+}
+
+/* Responsive navigation and hero */
+@media (max-width:900px){
+  .zaad-nav{padding:11px 0}
+  .container{width:min(100% - 32px,1160px)}
+  .nav-inner{gap:14px}
+  .zaad-logo .brand-logo-full{width:100px;height:56px}
+  .mobile-menu{
+    display:grid;
+    place-items:center;
+    margin-left:auto;
+    width:42px;
+    height:42px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:10px;
+    background:rgba(255,255,255,.05);
+    color:#fff;
+  }
+  .mobile-drawer{
+    display:grid;
+    position:absolute;
+    left:12px;
+    right:12px;
+    top:64px;
+    padding:16px;
+    gap:6px;
+    background:#061724;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
+    box-shadow:0 24px 50px rgba(0,0,0,.3);
+  }
+  .mobile-drawer a{
+    padding:13px 12px;
+    border-radius:9px;
+    color:#dbe7ef;
+    font-size:13px;
+    font-weight:750;
+  }
+  .mobile-drawer a:hover{background:rgba(47,128,255,.12);color:#fff}
+
+  .reference-hero{
+    min-height:0;
+    padding:116px 0 64px;
+  }
+  .reference-hero .hero-grid{
+    grid-template-columns:1fr;
+    gap:34px;
+  }
+  .reference-hero .hero-copy{padding:0}
+  .reference-hero .hero h1{
+    font-size:clamp(50px,11vw,76px);
+    line-height:.88;
+    max-width:10.5ch;
+    margin-bottom:18px;
+  }
+  .reference-hero .hero h2{
+    font-size:clamp(27px,6.2vw,40px);
+    line-height:.96;
+    max-width:20ch;
+  }
+  .reference-hero .hero p{
+    font-size:14px;
+    line-height:1.7;
+    max-width:620px;
+  }
+  .reference-hero .hero-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+    max-width:520px;
+  }
+  .reference-hero .hero-actions .zaad-btn{
+    width:100%;
+    min-height:50px;
+    font-size:12px;
+  }
+  .reference-hero .hero-checks{
+    gap:10px 14px;
+  }
+  .reference-hero .hero-checks span{
+    font-size:10px;
+  }
+  .reference-hero .hero-art{
+    height:min(440px,92vw);
+    min-height:320px;
+    border-radius:18px;
+  }
+}
+
+@media (max-width:560px){
+  body{min-width:320px}
+  .reference-hero{
+    padding-top:103px;
+    padding-bottom:52px;
+  }
+  .reference-hero .hero h1{
+    font-size:clamp(45px,13.2vw,62px);
+    max-width:10ch;
+    letter-spacing:-.025em;
+  }
+  .reference-hero .hero h2{
+    font-size:27px;
+    max-width:19ch;
+  }
+  .reference-hero .hero p{font-size:13px}
+  .reference-hero .hero-art{
+    height:330px;
+    min-height:0;
+  }
+  .reference-hero .art-title{
+    left:18px;
+    top:18px;
+    font-size:31px;
+  }
+  .reference-hero .art-center{
+    width:100px;
+    height:100px;
+  }
+  .reference-hero .art-node{
+    min-width:74px;
+    max-width:95px;
+    padding:7px 8px;
+  }
+  .reference-hero .art-node b{font-size:9px}
+  .reference-hero .art-node small{font-size:7px}
+  .reference-hero .art-badge{
+    right:10px;
+    bottom:10px;
+    font-size:7px;
+  }
+
+  .zaad-wrap{width:calc(100% - 32px)}
+  .zaad-new h2{font-size:clamp(39px,12vw,58px)}
+  .zaad-new .zaad-problem,
+  .zaad-new .zaad-solutions,
+  .zaad-new .zaad-recovery,
+  .zaad-new .zaad-growth,
+  .zaad-new .zaad-platform,
+  .zaad-new .zaad-unibox,
+  .zaad-new .zaad-final{
+    padding-top:68px;
+    padding-bottom:68px;
+  }
+  .zaad-new .zaad-problem-head,
+  .zaad-new .zaad-section-head{gap:22px}
+  .zaad-new .zaad-leak-grid{margin-top:30px}
+  .zaad-new .zaad-leak{
+    min-height:0;
+    padding:19px 0;
+    border-bottom:1px solid #3a4147;
+  }
+  .zaad-new .zaad-leak h3{font-size:19px;margin:12px 0 7px}
+  .zaad-new .zaad-leak p{font-size:13px}
+  .zaad-new .zaad-tabs{
+    margin-top:28px;
+    margin-bottom:12px;
+    scrollbar-width:none;
+  }
+  .zaad-new .zaad-tabs::-webkit-scrollbar{display:none}
+  .zaad-new .zaad-tabs button{font-size:10px;padding:10px 13px}
+  .zaad-new .zaad-module{
+    padding:20px;
+    border-radius:18px;
+    gap:22px;
+  }
+  .zaad-new .zaad-module-copy p,
+  .zaad-new .zaad-recovery p,
+  .zaad-new .zaad-growth p,
+  .zaad-new .zaad-platform p,
+  .zaad-new .zaad-unibox>div>p{font-size:14px}
+  .zaad-new .zaad-module-flow{min-height:0;padding:17px}
+  .zaad-new .module-node{padding:12px}
+  .zaad-new .module-node strong{font-size:13px}
+  .zaad-new .recovery-card,
+  .zaad-new .growth-dashboard{padding:18px;border-radius:18px}
+  .zaad-new .phone-shell{
+    width:min(100%,340px);
+    border-width:6px;
+    border-radius:30px;
+    padding:15px;
+  }
+  .zaad-new .unibox-ui{
+    margin-top:28px;
+    border-radius:17px;
+    min-height:0;
+  }
+  .zaad-new .unibox-ui aside{
+    padding:10px;
+    gap:4px;
+  }
+  .zaad-new .unibox-ui aside button{
+    min-height:42px;
+    padding:10px 11px;
+    font-size:11px;
+  }
+  .zaad-new .conversation{padding:18px}
+  .zaad-new .msg{
+    max-width:94%;
+    font-size:13px;
+    padding:12px 13px;
+  }
+  .zaad-new .conversation-status{font-size:10px;margin-top:24px}
+  .zaad-new .zaad-final a{width:100%;justify-content:center}
+}
+
+/* Avoid accidental horizontal overflow from decorative artwork */
+@media(max-width:900px){
+  .app-shell,.zaad-new,.hero,.reference-hero{max-width:100%;overflow-x:hidden}
+}
+
+
+/* FORCE REDESIGN VISIBILITY + MOBILE OVERRIDES */
+.compact-home .zaad-solutions{display:block!important}
+.compact-home .zaad-engine{display:none!important}
+
+@media(max-width:900px){
+  .zaad-new .zaad-section-head,
+  .zaad-new .recovery-grid,
+  .zaad-new .growth-grid,
+  .zaad-new .platform-grid{grid-template-columns:1fr!important}
+  .zaad-new .zaad-section-head>p{max-width:620px}
+  .zaad-new .zaad-module{grid-template-columns:1fr!important}
+  .zaad-new .unibox-ui{grid-template-columns:1fr!important}
+  .zaad-new .unibox-ui aside{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .reference-hero .hero h1{font-size:clamp(42px,12.5vw,58px)!important;line-height:.9!important}
+  .reference-hero .hero h2{font-size:25px!important;line-height:1!important}
+  .reference-hero .hero-art{height:300px!important}
+  .zaad-new .zaad-section-head h2,
+  .zaad-new .zaad-problem-head h2{font-size:clamp(38px,11.5vw,54px)!important}
+  .zaad-new .zaad-module-flow{overflow:hidden}
+  .zaad-new .module-arrow{font-size:16px}
+  .zaad-new .growth-flow{flex-wrap:wrap}
+  .zaad-new .phone-shell{margin-inline:auto}
+  .zaad-new .unibox-ui aside{grid-template-columns:1fr 1fr}
+}
