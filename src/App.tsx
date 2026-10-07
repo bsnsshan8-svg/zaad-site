@@ -4,7 +4,7 @@ import ZaadHero from './components/ZaadHero';
 import ZaadSystemCore from './components/ZaadSystemCore';
 import ZaadNewSections from './components/ZaadNewSections';
 
-const sectionOrder = ['problem', 'engine', 'capabilities', 'recovery', 'growth', 'platform', 'unibox', 'final'];
+const sectionOrder = ['problem', 'recovery', 'growth', 'platform', 'unibox', 'final'];
 
 export default function App() {
   const [selection, setSelection] = useState<string[]>(sectionOrder);
@@ -22,7 +22,7 @@ export default function App() {
     <div id="top" className="app-shell">
       <ZaadHero />
       <ZaadSystemCore />
-      <div className={hidden.map((id) => `hide-${id}`).join(' ')}>
+      <div className={`compact-home ${hidden.map((id) => `hide-${id}`).join(' ')}`}>
         <ZaadNewSections />
       </div>
     </div>
